@@ -1,6 +1,6 @@
-# Speech Denoising Using Only Single Noisy Audio Samples
+# Self-Supervised_Speech_Denoising_Using_Only_Noisy_Audio_Signals
 
-Source code for the paper "Speech Denoising Using Only Single Noisy Audio Samples". In this paper, we propose a novel Single Noisy Audio Denoising Framework (SNA-DF) for speech denoising using only single noisy audio samples, which overcomes the limitation of constructing either noisy-clean training pairs or multiple independent noisy audio samples.
+Source code for the paper "Self-Supervised Speech Denoising Using Only Noisy Audio Signals". In this paper, we propose a self-supervised speech denoising strategy named Only-Noisy Training (ONT), which solves the speech denoising problem with only noisy audio signals in audio space for the first time. 
 
 ![./SNA_DF.PNG](./SNA_DF.png)
 
@@ -21,17 +21,17 @@ python urbansound_dataset_generator.py
 
 ## Model
 
-The proposed SNA-DF contains two modules: training audio pairs generated module and audio denoising module. 
+The proposed ONT constructs training pairs only from each single noisy audio, and it contains two modules: training audio pairs generated module and speech de-noising module.
 - The first module adopts a random audio sub-sampler on single noisy audio samples for the generation of training audio pairs. 
 - The sub-sampled training audio pairs are then fed into the audio denoising module, which employs a deep complex U-Net incorporating a complex two-stage transformer (cTSTM) to extract both magnitude and phase information.
 ![./models.PNG](./models.png)
 ## Training
 
-You can choose the following three models for training: SNA,SNA-rTSTM and SNA-cTSTM. SNA represents our speech denoising strategy using single noisy audio samples with a complex U-Net without TSTM; SNA-rTSTM represents our novel strategy with a real-valued TSTM (rTSTM) between the complex U-Net; SNA-cTSTM represents our novel strategy with a complex-valued TSTM (cTSTM) between the complex U-Net. You can train the model by running the following script:
+You can choose the following three models for training: ONT,ONT-rTSTM and ONT-cTSTM. ONT represents our speech denoising strategy using single noisy audio samples with a complex U-Net without TSTM; ONT-rTSTM represents our novel strategy with a real-valued TSTM (rTSTM) between the complex U-Net; ONT-cTSTM represents our novel strategy with a complex-valued TSTM (cTSTM) between the complex U-Net. You can train the model by running the following script:
 ```
 python train.py
 ```
-> The original raw audio waveforms are first sampled at 48kHz and then transformed by the STFT with a 64ms Hamming window and 16ms hop length to obtain complex-valued spectrograms. The length of training pairs is 1/2 times of original noisy samples. The number of two-stage transformer blocks(TSTBs) is 6. In the loss function, we set α = 0.8, β = 1/200, γ=2 in the synthetic experiments and γ=1 in the real world experiments empirically. We use Adam optimizer with a learning rate of 0.001. **You can adjust these parameters to suit different training needs.**
+> The original raw audio waveforms are first sampled at 48kHz and then transformed by the STFT with a 64ms Hamming window and 16ms hop size to obtain complex-valued spectrograms. The length of training pairs is 1/2 times of original noisy samples. The number of two-stage transformer blocks(TSTBs) is 6. In the loss function, we set α = 0.8, β = 1/200, γ=2 in the synthetic experiments and γ=1 in the real world experiments empirically. We use Adam optimizer with a learning rate of 0.001. **You can adjust these parameters to suit different training needs.**
 
 ## Special thanks to the following repositories:
 - https://github.com/madhavmk/Noise2Noise-audio_denoising_without_clean_training_data
@@ -42,7 +42,8 @@ python train.py
 ## Reference
 If it helps your research, please cite:
 ```
-Qingchun Li, Jiasong Wu, Yilun Kong, Chunfeng Yang, Youyong Kong, Guanyu Yang, Lotfi Senhadji, Huazhong Shu, Speech Denoising Using Only Single Noisy Audio Samples
+Jiasong Wu, Qingchun Li, Youyong Kong, Guanyu Yang, Lotfi Senhadji and Huazhong Shu, Self-Supervised Speech Denoising Using Only Noisy Audio Signals
+
 ```
 ## Contacts
 - Qingchun Li: 3193891505@qq.com
