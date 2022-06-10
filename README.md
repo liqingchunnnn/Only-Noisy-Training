@@ -2,7 +2,7 @@
 
 Source code for the paper "Self-Supervised Speech Denoising Using Only Noisy Audio Signals". In this paper, we propose a self-supervised speech denoising strategy named Only-Noisy Training (ONT), which solves the speech denoising problem with only noisy audio signals in audio space for the first time. 
 
-![./SNA_DF.PNG](./SNA_DF.png)
+![./ONT.PNG](./ONT.png)
 
 ## Environment
 
